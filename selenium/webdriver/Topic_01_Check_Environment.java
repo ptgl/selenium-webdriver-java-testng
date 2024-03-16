@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit;
 
 public class Topic_01_Check_Environment {
     WebDriver driver;
-    String projectPath = System.getProperty("user.dir");
+    //String projectPath = System.getProperty("user.dir");
 
     @Test
     public void TC_01_Run_On_Firefox() {
@@ -23,7 +23,7 @@ public class Topic_01_Check_Environment {
 
     @Test
     public void TC_02_Run_On_Chrome() {
-        System.setProperty("webdriver.chrome.driver", projectPath + "\\browserDrivers\\chromedriver.exe");
+       // System.setProperty("webdriver.chrome.driver", projectPath + "\\browserDrivers\\chromedriver.exe");
         driver = new ChromeDriver();
         driver.get("https://www.facebook.com/");
         driver.quit();
