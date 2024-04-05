@@ -38,4 +38,13 @@ public class Topic_00_Template {
     public void afterClass(){
         driver.quit();
     }
+
+    private void sleepInSeconds(long seconds){
+        try {
+            Thread.sleep(seconds*1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }
