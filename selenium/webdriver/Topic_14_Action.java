@@ -151,14 +151,4 @@ public class Topic_14_Action {
     public void afterClass() {
         driver.quit();
     }
-
-    private void sleepInSeconds(long seconds) {
-        try {
-            Thread.sleep(seconds * 1000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-
-
-    }
 }
