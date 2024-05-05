@@ -3,7 +3,9 @@ package webdriver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WindowType;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -14,10 +16,13 @@ import java.util.Set;
 
 public class Topic_19_Windows_Tab {
     WebDriver driver;
+    WebDriver driver2;
+
 
     @BeforeClass
     public void beforeClass(){
         driver = new ChromeDriver();
+        driver2 = new FirefoxDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
     }
 
@@ -88,12 +93,55 @@ public class Topic_19_Windows_Tab {
         clossAllWindowsExceptParent(parentId);
         driver.findElement(By.cssSelector("input[aria-label='Tìm kiếm']")).sendKeys("automation", Keys.ENTER);
         Assert.assertEquals(driver.findElement(By.cssSelector("span.headword>span")).getText(), "automation");
+    }
 
+    @Test
+    public void TC_04_Selenium4() {
+        driver.get("https://kynaenglish.vn/");
+        String parentId = driver.getWindowHandle();
+        printInfo();
+
+        driver.switchTo().newWindow(WindowType.WINDOW).get("https://kynaenglish.vn/kyna-english-teachers");
+        printInfo();
+        driver.findElement(By.cssSelector("input[placeholder='Nhập tên Giáo viên']")).sendKeys("Marry");
+        sleepInSeconds(3);
+
+        driver.switchTo().newWindow(WindowType.TAB).get("https://www.facebook.com/");
+        printInfo();
+        driver.findElement(By.id("email")).sendKeys("mail@mail.com");
+        sleepInSeconds(3);
+
+        clossAllWindowsExceptParent(parentId);
+        printInfo();
+        sleepInSeconds(3);
+    }
+
+    @Test
+    public void TC_05_Two_Drivers(){
+        driver.get("http://live.techpanda.org/");
+        driver2.get("https://dictionary.cambridge.org/vi/");
+
+        driver.findElement(By.xpath("//a[text()='Mobile']")).click();
+        driver.findElement(By.xpath("//a[@title='Sony Xperia']/ancestor::div[@class='product-info']//li/a[@class='link-compare']")).click();
+
+        driver2.findElement(By.cssSelector("input[aria-label='Tìm kiếm']")).sendKeys("automation", Keys.ENTER);
+        sleepInSeconds(2);
+
+        Assert.assertEquals(driver.findElement(By.cssSelector("li.success-msg span")).getText(),"The product Sony Xperia has been added to comparison list.");
+        Assert.assertEquals(driver2.findElement(By.cssSelector("span.headword>span")).getText(), "automation");
+
+        driver2.quit();
     }
 
     @AfterClass
     public void afterClass(){
         driver.quit();
+    }
+
+    private void printInfo(){
+        System.out.println("Driver Id: "+driver.toString());
+        System.out.println(driver.getTitle());
+        System.out.println(driver.getCurrentUrl());
     }
 
     private void switchToWindowByTitle(String tilte){
