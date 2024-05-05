@@ -86,7 +86,7 @@ public class Topic_18_IFrame {
 
     @AfterClass
     public void afterClass(){
-      // driver.quit();
+       driver.quit();
     }
 
     private void sleepInSeconds(long seconds){
