@@ -8,6 +8,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.time.Duration;
+import java.util.Random;
 
 public class Topic_20_JS_Executor {
     WebDriver driver;
@@ -83,7 +84,25 @@ public class Topic_20_JS_Executor {
 
     @Test
     public void TC_03_Create_Account() {
+        navigateToUrlByJS("http://live.techpanda.org/");
+        clickToElementByJS("//a[@data-target-element='#header-account']");
+        clickToElementByJS("//div[@id='header-account']//a[@title='My Account']");
+        clickToElementByJS("//a[@title='Create an Account']");
 
+        sendkeyToElementByJS("//input[@name='firstname']", "automation");
+        sendkeyToElementByJS("//input[@name='lastname']","testing");
+        sendkeyToElementByJS("//input[@name='email']",getRandomEmail());
+        sendkeyToElementByJS("//input[@name='password']","Abcd@1234");
+        sendkeyToElementByJS("//input[@name='confirmation']","Abcd@1234");
+
+        clickToElementByJS("//button[@title='Register']");
+        Assert.assertEquals(getInnerTextOfElement("//li[@class='success-msg']//li/span"),"Thank you for registering with Main Website Store.");
+
+        clickToElementByJS("//div[@id='header-account']//a[@title='My Account']");
+        clickToElementByJS("//a[@title='Log Out']");
+        sleepInSeconds(5);
+
+        Assert.assertTrue(executeForBrowser("return document.URL").toString().contains("http://live.techpanda.org"));
     }
 
     @Test
@@ -99,7 +118,7 @@ public class Topic_20_JS_Executor {
 
     @AfterClass
     public void afterClass(){
-        driver.quit();
+        //driver.quit();
     }
     public Object executeForBrowser(String javaScript) {
         return jsExecutor.executeScript(javaScript);
@@ -118,8 +137,6 @@ public class Topic_20_JS_Executor {
         System.out.println("actual Text "+textActual);
         return textActual.equals(textExpected);
     }
-
-
 
     public void scrollToBottomPage() {
         jsExecutor.executeScript("window.scrollBy(0,document.body.scrollHeight)");
@@ -180,6 +197,11 @@ public class Topic_20_JS_Executor {
     public WebElement getElement(String locator) {
         return driver.findElement(By.xpath(locator));
     }
+
+    private String getRandomEmail(){
+        return "automation" + new Random().nextInt(99999) + "@gmail.com";
+    }
+
     private void sleepInSeconds(long seconds){
         try {
             Thread.sleep(seconds*1000);
