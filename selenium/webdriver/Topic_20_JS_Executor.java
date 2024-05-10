@@ -118,7 +118,7 @@ public class Topic_20_JS_Executor {
 
     @AfterClass
     public void afterClass(){
-        //driver.quit();
+        driver.quit();
     }
     public Object executeForBrowser(String javaScript) {
         return jsExecutor.executeScript(javaScript);
