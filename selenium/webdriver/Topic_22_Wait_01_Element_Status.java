@@ -111,18 +111,9 @@ public class Topic_22_Wait_01_Element_Status {
         Assert.assertEquals(driver.findElements(customLabel).size(), 0);
     }
 
-
     @AfterClass
     public void afterClass(){
         driver.quit();
-    }
-
-    private void sleepInSeconds(long seconds){
-        try {
-            Thread.sleep(seconds*1000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
     }
 
 }
