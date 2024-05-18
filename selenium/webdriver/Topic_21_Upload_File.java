@@ -86,10 +86,7 @@ public class Topic_21_Upload_File {
         }
     }
 
-    @Test
-    public void TC_03() {
 
-    }
 
     @AfterClass
     public void afterClass(){
