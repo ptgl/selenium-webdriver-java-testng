@@ -78,7 +78,7 @@ public class Topic_26_Wait_06_Explicit_Wait {
     }
 
     @Test
-    public void TC_04_Datetime(){
+    public void TC_04_Ajax_Loading(){
         explicitWait = new WebDriverWait(driver, Duration.ofSeconds(10));
         driver.get("https://demos.telerik.com/aspnet-ajax/ajaxloadingpanel/functionality/explicit-show-hide/defaultcs.aspx");
 
@@ -100,7 +100,7 @@ public class Topic_26_Wait_06_Explicit_Wait {
     }
 
     @Test
-    public void TC_05_Upload(){
+    public void TC_05_Upload_File(){
         explicitWait = new WebDriverWait(driver, Duration.ofSeconds(60));
         driver.get("https://gofile.io/?t=uploadFiles");
 
